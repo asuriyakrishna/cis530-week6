@@ -18,12 +18,17 @@ public class PostClientServiceImpl implements PostClientService {
 	}
 
 	@Override
-	public List<PostDto> getPosts() {
-		return jsonPlaceholderClient.getPosts();
+	public List<PostDto> getAllPosts() {
+		return jsonPlaceholderClient.getAllPosts();
 	}
 
 	@Override
 	public PostDto getPostById(Long id) {
 		return jsonPlaceholderClient.getPostById(id);
+	}
+
+	@Override
+	public List<PostDto> getPostsByUserId(Long userId) {
+		return jsonPlaceholderClient.getPostsByUserId(userId);
 	}
 }

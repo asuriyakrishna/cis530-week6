@@ -20,7 +20,7 @@ public class JsonPlaceholderClient {
 		this.webClient = webClient;
 	}
 
-	public List<PostDto> getPosts() {
+	public List<PostDto> getAllPosts() {
 		try {
 			return webClient.get()
 					.uri("/posts")
@@ -46,6 +46,22 @@ public class JsonPlaceholderClient {
 			throw new ResourceNotFoundException("Post with ID " + id + " was not found");
 		} catch (WebClientResponseException exception) {
 			throw new ApiClientException("JSONPlaceholder returned an error while retrieving post " + id, exception);
+		} catch (WebClientRequestException exception) {
+			throw new ApiClientException("Unable to connect to JSONPlaceholder", exception);
+		}
+	}
+
+	public List<PostDto> getPostsByUserId(Long userId) {
+		try {
+			return webClient.get()
+					.uri(uriBuilder -> uriBuilder.path("/posts").queryParam("userId", userId).build())
+					.retrieve()
+					.bodyToFlux(PostDto.class)
+					.collectList()
+					.block();
+		} catch (WebClientResponseException exception) {
+			throw new ApiClientException("JSONPlaceholder returned an error while retrieving posts for user " + userId,
+					exception);
 		} catch (WebClientRequestException exception) {
 			throw new ApiClientException("Unable to connect to JSONPlaceholder", exception);
 		}
