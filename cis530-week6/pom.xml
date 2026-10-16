@@ -11,7 +11,8 @@
 	<groupId>edu.bellevue</groupId>
 	<artifactId>cis530-week6</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
+	<name>cis530-week6</name>
+	<packaging>jar</packaging>
 	<description/>
 	<url/>
 	<licenses>
